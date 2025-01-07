@@ -4,6 +4,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
+interface Testimonial {
+  name: string;
+  role: string;
+  location: string;
+  quote: string;
+  image: string;
+  rating: number;
+}
+
 export default function Testimonials() {
   const testimonials = [
     {
@@ -99,7 +108,7 @@ export default function Testimonials() {
   );
 }
 
-function TestimonialCard({ testimonial, index }: { testimonial: any; index: number }) {
+function TestimonialCard({ testimonial, index }: { testimonial: Testimonial; index: number }) {
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.8 }}

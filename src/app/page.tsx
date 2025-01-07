@@ -3,10 +3,26 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Icons } from "@/components/icons";
-import { motion, useScroll, useTransform, useSpring, useInView } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { ParallaxImageSection } from "@/components/ParallaxImageSection";
 import { StaggeredImageGrid } from "@/components/StaggeredImageGrid";
 import React from "react";
+
+// First, let's define proper types for our data structures
+interface Service {
+  title: string;
+  description: string;
+  icon: React.ReactNode;
+  link: string;
+}
+
+interface Testimonial {
+  name: string;
+  location: string;
+  quote: string;
+  image: string;
+  rating: number;
+}
 
 export default function Home() {
   const { scrollYProgress } = useScroll();
@@ -112,8 +128,8 @@ export default function Home() {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {serviceCards.map((service, index) => (
-              <ServiceCard key={service.title} service={service} index={index} className="glass-card hover-card" />
+            {serviceCards.map((service) => (
+              <ServiceCard key={service.title} service={service} className="glass-card hover-card" />
             ))}
           </div>
         </section>
@@ -154,8 +170,8 @@ export default function Home() {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {testimonials.slice(0, 6).map((testimonial, index) => (
-              <TestimonialCard key={testimonial.name} testimonial={testimonial} index={index} />
+            {testimonials.slice(0, 6).map((testimonial) => (
+              <TestimonialCard key={testimonial.name} testimonial={testimonial} />
             ))}
           </div>
         </motion.section>
@@ -295,16 +311,8 @@ const fadeInUp = {
   transition: { duration: 0.5 }
 };
 
-const staggerContainer = {
-  animate: {
-    transition: {
-      staggerChildren: 0.1
-    }
-  }
-};
-
 // Update the service card component with simpler animations:
-function ServiceCard({ service, index, className }: { service: any; index: number; className?: string }) {
+function ServiceCard({ service, className }: { service: Service; className?: string }) {
   const cardRef = React.useRef(null);
   const { scrollYProgress } = useScroll({
     target: cardRef,
@@ -338,13 +346,13 @@ function ServiceCard({ service, index, className }: { service: any; index: numbe
 }
 
 // Update the testimonial card component:
-function TestimonialCard({ testimonial, index }: { testimonial: any; index: number }) {
+function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.8 }}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
+      transition={{ duration: 0.5 }}
       whileHover={{ 
         scale: 1.02,
         rotateY: 5,

@@ -5,6 +5,13 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Icons } from "@/components/icons";
 
+interface Service {
+  title: string;
+  description: string;
+  features: string[];
+  icon: React.ReactNode;
+}
+
 export default function Services() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-background via-background to-tertiary/30">
@@ -220,7 +227,7 @@ const process = [
 ];
 
 // Service Card Component
-function ServiceCard({ service, index }: { service: any; index: number }) {
+function ServiceCard({ service, index }: { service: Service; index: number }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}

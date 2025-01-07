@@ -31,7 +31,7 @@ export default function Brooklyn() {
         >
           <h2 className="text-3xl font-serif mb-6">Dynamic, Holistic Health for Brooklyn</h2>
           <p className="text-foreground/80 mb-6 leading-relaxed">
-            Brooklyn's eclectic vibe is the perfect backdrop for a wellness journey that bridges creativity and practicality. Choose in-person appointments for an immersive experience or opt for online coaching that brings holistic transformation right to your living room. Let's tap into the borough's diversity to inspire a healthier, more balanced life.
+            Brooklyn&apos;s eclectic vibe is the perfect backdrop for a wellness journey that bridges creativity and practicality. Choose in-person appointments for an immersive experience or opt for online coaching that brings holistic transformation right to your living room. Let&apos;s tap into the borough&apos;s diversity to inspire a healthier, more balanced life.
           </p>
           <motion.div
             whileHover={{ scale: 1.02 }}

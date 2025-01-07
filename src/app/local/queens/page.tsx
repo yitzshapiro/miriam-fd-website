@@ -31,7 +31,7 @@ export default function Queens() {
         >
           <h2 className="text-3xl font-serif mb-6">Empowering Queens Residents</h2>
           <p className="text-foreground/80 mb-6 leading-relaxed">
-            Queens' cultural richness demands a customizable wellness approach. My in-person coaching sessions focus on immediate connection and accountability, while my online programs offer the ultimate flexibility. Regardless of which format you choose, you'll have full access to personalized meal plans, mindfulness training, and ongoing support.
+            Queens&apos; cultural richness demands a customizable wellness approach. My in-person coaching sessions focus on immediate connection and accountability, while my online programs offer the ultimate flexibility. Regardless of which format you choose, you&apos;ll have full access to personalized meal plans, mindfulness training, and ongoing support.
           </p>
           <motion.div
             whileHover={{ scale: 1.02 }}

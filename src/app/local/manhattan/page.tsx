@@ -31,7 +31,7 @@ export default function Manhattan() {
         >
           <h2 className="text-3xl font-serif mb-6">Elevate Your Manhattan Lifestyle</h2>
           <p className="text-foreground/80 mb-6 leading-relaxed">
-            Manhattan's nonstop energy demands an adaptable approach to personal well-being. Whether you prefer the ambiance of my upscale Manhattan office or want the convenience of virtual sessions, I tailor each aspect to fit your unique needs. Together, we'll conquer stress, optimize nutrition, and build sustainable habits—all without missing a beat in your busy schedule.
+            Manhattan&apos;s nonstop energy demands an adaptable approach to personal well-being. Whether you prefer the ambiance of my upscale Manhattan office or want the convenience of virtual sessions, I tailor each aspect to fit your unique needs. Together, we&apos;ll conquer stress, optimize nutrition, and build sustainable habits—all without missing a beat in your busy schedule.
           </p>
           <motion.div
             whileHover={{ scale: 1.02 }}

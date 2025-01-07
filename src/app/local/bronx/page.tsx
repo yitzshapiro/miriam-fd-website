@@ -31,7 +31,7 @@ export default function Bronx() {
         >
           <h2 className="text-3xl font-serif mb-6">Creating Sustainable Change</h2>
           <p className="text-foreground/80 mb-6 leading-relaxed">
-            Your well-being shouldn't be limited by geography. Whether you're based in the Bronx or living elsewhere, my holistic coaching programs are designed to guide you toward balanced nutrition, improved mental health, and consistent daily habits. Join me in-person or conveniently online as we cultivate a healthier lifestyle.
+            Your well-being shouldn&apos;t be limited by geography. Whether you&apos;re based in the Bronx or living elsewhere, my holistic coaching programs are designed to guide you toward balanced nutrition, improved mental health, and consistent daily habits. Join me in-person or conveniently online as we cultivate a healthier lifestyle.
           </p>
           <motion.div
             whileHover={{ scale: 1.02 }}
