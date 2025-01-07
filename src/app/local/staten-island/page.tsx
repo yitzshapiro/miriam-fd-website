@@ -1,3 +1,5 @@
+'use client';
+
 import Link from "next/link";
 import { motion } from "framer-motion";
 
@@ -27,7 +29,6 @@ export default function StatenIsland() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="bg-white/80 p-8 rounded-2xl shadow-luxury mb-12"
         >
-          <h2 className="text-3xl font-serif mb-6">Your Local Wellness Guide</h2>
           <p className="text-foreground/80 mb-6 leading-relaxed">
             Staten Island&apos;s peaceful neighborhoods are ideal for implementing holistic health strategies. Whether you prefer in-person sessions or the convenience of online coaching, I&apos;ll help you develop sustainable wellness practices that fit your lifestyle.
           </p>
