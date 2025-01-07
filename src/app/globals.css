@@ -1,21 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@300;400;500&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #FAF9F7;
+  --foreground: #1A1A1A;
+  --accent: #C4B0A3;
+  --primary: #8A8A8A;
+  --secondary: #E5E0DA;
+  --tertiary: #F5F3F0;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #FAF9F7;
+    --foreground: #1A1A1A;
   }
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0;
+  line-height: 1.5;
+  font-weight: 300;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Cormorant Garamond', serif;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  font-weight: 300;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+a:hover {
+  color: var(--accent);
+}
+
+.btn-primary {
+  @apply bg-foreground text-white px-6 py-3 
+    rounded-full font-light text-sm tracking-wide
+    transition-all duration-300 inline-flex items-center justify-center
+    hover:bg-accent hover:shadow-md transform hover:-translate-y-0.5;
+}
+
+.btn-secondary {
+  @apply bg-transparent text-foreground px-6 py-3 
+    rounded-full font-light text-sm tracking-wide
+    transition-all duration-300 inline-flex items-center justify-center
+    hover:bg-foreground/5 hover:border-accent
+    border border-foreground/20;
+}
+
+.card {
+  @apply bg-white p-8 rounded-lg
+    transition-all duration-300
+    hover:shadow-sm;
+}
+
+.testimonial {
+  @apply bg-tertiary p-6 rounded-lg border-l-4 border-accent;
+}
+
+.footer {
+  @apply bg-tertiary py-12 px-8 mt-20 border-t border-foreground/10;
+}
+
+/* Add new utility classes */
+.gradient-text {
+  @apply text-foreground relative;
+  background-clip: text;
+  -webkit-background-clip: text;
+  user-select: text;
+}
+
+.hover-card {
+  @apply transition-all duration-500 
+    hover:translate-y-[-10px] hover:shadow-2xl
+    hover:bg-gradient-to-b hover:from-white hover:to-tertiary/50;
+}
+
+/* Add smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Enhance text selection */
+::selection {
+  @apply bg-accent/20 text-foreground;
+  color: var(--foreground);
+  background: rgba(196, 176, 163, 0.2);
+}
+
+/* Update heading styles */
+h2 {
+  @apply text-foreground/90 font-light;
+}
+
+/* Optional: Add a subtle transition effect for child elements when parent h2 is hovered */
+h2 + p {
+  @apply transition-colors duration-500;
+}
+
+h2:hover + p {
+  @apply text-accent/80;
+}
+
+/* Add luxury glass effect utility */
+.glass-card {
+  @apply bg-white/95 border border-foreground/10 
+    shadow-sm transition-all duration-300;
+}
+
+/* Add floating animation */
+.floating {
+  animation: none;
+}
+
+@keyframes floating {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+/* Fix hero image centering */
+.hero-image-container {
+  @apply flex justify-center items-center w-full;
 }
