@@ -1,0 +1,46 @@
+version: '3'
+
+services:
+  wordpress:
+    image: wordpress:latest
+    platform: linux/arm64/v8
+    ports:
+      - "8080:80"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress_password
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DEBUG: 1
+    volumes:
+      - wordpress_data:/var/www/html
+      - ./wp-content:/var/www/html/wp-content
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    platform: linux/arm64/v8
+    volumes:
+      - db_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: somewordpress
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress_password
+    command: '--default-authentication-plugin=mysql_native_password'
+
+  # Optional phpMyAdmin for database management
+  phpmyadmin:
+    image: arm64v8/phpmyadmin
+    platform: linux/arm64/v8
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: db
+    depends_on:
+      - db
+
+volumes:
+  wordpress_data:
+  db_data: 
