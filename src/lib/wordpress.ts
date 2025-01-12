@@ -43,9 +43,6 @@ export async function fetchPosts(filters?: { category?: string; tag?: string }) 
   const res = await fetch(url);
   const data = await res.json();
   
-  // Debug log
-  console.log('WordPress API response:', data);
-  
   // Ensure we're working with valid posts
   if (!data || (Array.isArray(data) && data.length === 0)) {
     return [];
