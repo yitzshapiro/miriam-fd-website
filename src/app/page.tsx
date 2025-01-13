@@ -34,73 +34,130 @@ export default function Home() {
 
   return (
     <div className="min-h-screen font-sans bg-gradient-to-b from-background via-background to-tertiary/30">
-      <main className="max-w-7xl mx-auto space-y-32">
+      <main className="space-y-32">
         {/* Hero Section */}
         <motion.section
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="relative px-4 pt-40 pb-48 flex flex-col items-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
+          className="relative px-4 sm:px-6 min-h-[90vh] flex flex-col items-center justify-center hero-section"
+          role="banner"
+          aria-label="Welcome section"
         >
-          {/* Background pattern - updated with leaves */}
-          <div 
-            className="absolute inset-0 bg-[url('/images/leaves-bg.jpg')] bg-cover opacity-20 bg-center"
-            style={{ backgroundSize: 'cover' }}
+          {/* Full-screen background image */}
+          <motion.div 
+            className="absolute inset-0 bg-[url('/images/wellness2.jpg')] bg-cover bg-center"
+            initial={{ scale: 1.1 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 2 }}
+            aria-hidden="true"
           />
           
-          {/* Optional overlay to ensure text readability */}
-          <div className="absolute inset-0 bg-gradient-to-b from-background/80 to-background/40" />
+          {/* Single subtle overlay for text readability */}
+          <div 
+            className="absolute inset-0 bg-black/10" 
+            aria-hidden="true" 
+          />
           
-          <div className="max-w-3xl w-full mx-auto text-center relative">
-            <motion.div 
-              className="relative flex justify-center w-full mb-8"
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+          <div className="max-w-3xl w-full mx-auto text-center relative z-10">
+            {/* Main heading with improved contrast */}
+            <motion.h1 
+              className="text-5xl sm:text-6xl lg:text-7xl font-serif font-normal mb-8 leading-tight tracking-wide"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.8 }}
             >
-              <div className="relative">
-                <Image
-                  className="rounded-full shadow-2xl border-4 border-white/90"
-                  src="/images/hero.jpg"
-                  alt="Miriam Fuentecilla Diaz"
-                  width={200}
-                  height={200}
-                  priority
+              <span className="sr-only">Elevate Your Wellbeing to New Heights</span>
+              <span aria-hidden="true">
+                Elevate Your{" "}
+                <motion.span 
+                  className="text-white inline-block"
+                  animate={{
+                    opacity: [1, 0.9, 1],
+                  }}
+                  transition={{
+                    duration: 8,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                >
+                  Wellbeing
+                </motion.span>{" "}
+                to
+                <br />
+                <motion.span 
+                  className="text-white inline-block"
+                  animate={{
+                    opacity: [0.9, 1, 0.9],
+                  }}
+                  transition={{
+                    duration: 8,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: 4
+                  }}
+                >
+                  New Heights
+                </motion.span>
+              </span>
+            </motion.h1>
+            
+            {/* Enhanced CTA section with better contrast */}
+            <motion.div 
+              className="flex flex-col sm:flex-row gap-6 justify-center items-center mt-12"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6, duration: 0.8 }}
+            >
+              <Link 
+                href="/contact" 
+                className="btn-primary w-full sm:w-auto text-center group relative overflow-hidden"
+                aria-label="Begin your wellness journey"
+              >
+                <motion.span
+                  className="absolute inset-0 bg-white/10"
+                  animate={{
+                    x: ["-100%", "100%"],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                  aria-hidden="true"
                 />
-              </div>
-            </motion.div>
-            
-            <h1 className="text-5xl sm:text-7xl font-serif font-normal mb-8 leading-tight">
-              Elevate Your <span className="gradient-text">Wellbeing</span> to
-              <span className="gradient-text"> New Heights</span>
-            </h1>
-            
-            {/* Enhanced CTA section */}
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mt-12">
-              <Link href="/contact" className="btn-primary w-full sm:w-auto text-center group">
-                Begin Your Journey
-                <span className="ml-2 group-hover:translate-x-1 transition-transform inline-block">→</span>
+                <span className="relative text-xl">
+                  Begin Your Journey
+                  <span className="ml-2 group-hover:translate-x-1 transition-transform inline-block" aria-hidden="true">→</span>
+                </span>
               </Link>
-              <Link href="/services" className="btn-secondary w-full sm:w-auto text-center">
+              <Link 
+                href="/services" 
+                className="btn-secondary w-full sm:w-auto text-center text-xl"
+                aria-label="Explore our wellness services"
+              >
                 Explore Services
               </Link>
-            </div>
+            </motion.div>
           </div>
 
-          {/* Scroll Indicator - moved outside the max-w-3xl container */}
+          {/* Enhanced scroll indicator */}
           <motion.div 
             className="absolute bottom-8 flex flex-col items-center gap-2"
             animate={{
               y: [0, 10, 0],
+              opacity: [0.7, 1, 0.7],
             }}
             transition={{
-              duration: 1.5,
+              duration: 2,
               repeat: Infinity,
               ease: "easeInOut",
             }}
+            aria-hidden="true"
           >
-            <span className="text-sm text-foreground/60 font-medium">Scroll to explore</span>
+            <span className="text-base text-white/90 font-medium">Scroll to explore</span>
             <svg 
-              className="w-6 h-6 text-accent" 
+              className="w-6 h-6 text-white" 
               fill="none" 
               viewBox="0 0 24 24" 
               stroke="currentColor"
@@ -115,32 +172,32 @@ export default function Home() {
           </motion.div>
         </motion.section>
 
-        {/* Floating Images Section */}
-        <ParallaxImageSection />
-
-        {/* Services Section - Using useScroll */}
-        <section className="px-4">
-          <div className="text-center mb-16">
+        {/* Services Section - Adjusted padding */}
+        <section className="px-4 sm:px-6">
+          <div className="text-center mb-16 max-w-4xl mx-auto">
             <h2 className="text-3xl sm:text-4xl font-serif mb-4">Transformative Services</h2>
-            <p className="text-foreground/70 max-w-2xl mx-auto">
+            <p className="text-foreground/70">
               Comprehensive wellness programs designed to address every aspect of your health journey
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-8xl mx-auto">
             {serviceCards.map((service) => (
               <ServiceCard key={service.title} service={service} className="glass-card hover-card" />
             ))}
           </div>
         </section>
 
-        {/* Wellness Journey Section - Add parallax effect */}
+        {/* Floating Images Section - Full width */}
+        <ParallaxImageSection />
+
+        {/* Wellness Journey Section - Full width */}
         <motion.section
           style={{
             scale: useTransform(springScroll, [0, 1], [0.8, 1]),
             opacity: useTransform(springScroll, [0, 0.2], [0.5, 1])
           }}
-          className="px-4 relative overflow-hidden"
+          className="px-4 sm:px-6 relative overflow-hidden"
         >
           <motion.div 
             variants={fadeInUp}
@@ -155,30 +212,30 @@ export default function Home() {
           <StaggeredImageGrid />
         </motion.section>
 
-        {/* Testimonials Section - Add 3D rotation effect */}
+        {/* Testimonials Section - Adjusted width */}
         <motion.section
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: "-100px" }}
-          className="px-4"
+          className="px-4 sm:px-6"
         >
-          <div className="text-center mb-16">
+          <div className="text-center mb-16 max-w-4xl mx-auto">
             <h2 className="text-3xl sm:text-4xl font-serif mb-4">Client Success Stories</h2>
-            <p className="text-foreground/70 max-w-2xl mx-auto">
+            <p className="text-foreground/70">
               Real transformations from people just like you
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-8xl mx-auto">
             {testimonials.slice(0, 6).map((testimonial) => (
               <TestimonialCard key={testimonial.name} testimonial={testimonial} />
             ))}
           </div>
         </motion.section>
 
-        {/* CTA Section - Add spotlight effect */}
+        {/* CTA Section - Full width with contained content */}
         <motion.section
-          className="px-4 pb-32"
+          className="px-4 sm:px-6 pb-32"
           whileInView="visible"
           initial="hidden"
           viewport={{ once: true }}
@@ -188,8 +245,8 @@ export default function Home() {
           }}
         >
           <motion.div 
+            className="max-w-4xl mx-auto text-center bg-accent/10 p-12 relative overflow-hidden"
             whileHover={{ scale: 1.02 }}
-            className="max-w-4xl mx-auto text-center bg-accent/10 p-12 rounded-3xl relative overflow-hidden"
           >
             {/* Add spotlight effect */}
             <motion.div
@@ -358,7 +415,7 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
         rotateY: 5,
         boxShadow: "0 20px 40px rgba(0,0,0,0.1)"
       }}
-      className="bg-white p-8 rounded-2xl shadow-luxury"
+      className="bg-white p-8 shadow-luxury"
     >
       <div className="flex items-center gap-4 mb-4">
         <Image
@@ -366,7 +423,7 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
           alt={testimonial.name}
           width={60}
           height={60}
-          className="rounded-full"
+          className=""
         />
         <div>
           <h4 className="font-serif">{testimonial.name}</h4>

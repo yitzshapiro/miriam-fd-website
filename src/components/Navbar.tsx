@@ -39,7 +39,7 @@ export default function Navbar() {
             : 'bg-background'
         }`}
       >
-        <div className="max-w-6xl mx-auto px-6 py-5">
+        <div className="max-w-[1440px] mx-auto px-8 py-5">
           <div className="flex justify-between items-center">
             {/* Logo */}
             <motion.div 
@@ -50,7 +50,7 @@ export default function Navbar() {
               <Link href="/" className="flex items-center group">
                 <div className="relative">
                   <Image
-                    src="/images/logo.png"
+                    src="/images/logo.svg"
                     alt="Miriam Fuentecilla Diaz Logo"
                     width={42}
                     height={42}
@@ -68,13 +68,13 @@ export default function Navbar() {
                   animate={{ opacity: 1, x: 0 }}
                   className="ml-4 text-lg font-serif text-foreground hidden sm:block"
                 >
-                  Miriam Fuentecilla
+                  Miriam Fuentecilla Diaz
                 </motion.span>
               </Link>
             </motion.div>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-2">
+            <div className="hidden md:flex items-center space-x-6">
               {navItems.map((item, index) => (
                 <motion.div
                   key={item.href}
@@ -100,7 +100,7 @@ export default function Navbar() {
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.6 }}
-                className="ml-2"
+                className="ml-4"
               >
                 <Link
                   href="/contact"
@@ -142,7 +142,7 @@ export default function Navbar() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 20 }}
-                className="relative z-[1000] flex flex-col justify-center items-center h-full px-6 py-4 space-y-6 pointer-events-none"
+                className="relative z-[1000] flex flex-col justify-center items-center h-full px-4 py-4 space-y-6 pointer-events-none"
               >
                 {/* Close Button */}
                 <motion.button

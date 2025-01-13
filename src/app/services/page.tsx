@@ -4,6 +4,7 @@ import React from 'react';
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Icons } from "@/components/icons";
+import { useScroll, useTransform } from "framer-motion";
 
 interface Service {
   title: string;
@@ -12,10 +13,15 @@ interface Service {
   icon: React.ReactNode;
 }
 
+interface ProcessStep {
+  title: string;
+  description: string;
+}
+
 export default function Services() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-background via-background to-tertiary/30">
-      <main className="max-w-7xl mx-auto px-4 py-12 space-y-32">
+      <main className="max-w-[1600px] mx-auto px-6 py-12 space-y-32">
         {/* Hero Section */}
         <motion.section
           initial={{ opacity: 0, y: 50 }}
@@ -27,7 +33,7 @@ export default function Services() {
             Transform Your Life with
             <span className="gradient-text block mt-2">Premium Wellness</span>
           </h1>
-          <p className="text-xl text-foreground/70 mb-12">
+          <p className="text-xl text-foreground/70 mb-12 max-w-2xl mx-auto">
             Discover exclusive health & wellness coaching services, tailored for ambitious individuals in NYC & worldwide.
           </p>
           
@@ -39,7 +45,7 @@ export default function Services() {
                 href={`#${item.toLowerCase()}`}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-6 py-2 rounded-full bg-accent/10 hover:bg-accent/20 
+                className="px-8 py-3 bg-accent/10 hover:bg-accent/20 
                          text-accent transition-all cursor-pointer"
               >
                 {item}
@@ -53,7 +59,7 @@ export default function Services() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8"
         >
           {services.map((service, index) => (
             <ServiceCard key={service.title} service={service} index={index} />
@@ -65,28 +71,21 @@ export default function Services() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="max-w-4xl mx-auto text-center"
+          className="max-w-6xl mx-auto text-center"
         >
-          <h2 className="text-3xl sm:text-4xl font-serif mb-16">Your Journey to Wellness</h2>
+          <motion.h2 
+            className="text-3xl sm:text-5xl font-serif mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            Your Journey to Wellness
+          </motion.h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {process.map((step, index) => (
-              <motion.div
-                key={step.title}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: index * 0.2 + 0.5 }}
-                className="relative"
-              >
-                <div className="absolute -top-8 left-1/2 -translate-x-1/2 w-16 h-16 
-                              bg-accent/10 rounded-full flex items-center justify-center">
-                  <span className="text-2xl font-serif text-accent">{index + 1}</span>
-                </div>
-                <div className="glass-card p-6 pt-12 rounded-2xl h-full">
-                  <h3 className="text-xl font-serif mb-4">{step.title}</h3>
-                  <p className="text-foreground/70">{step.description}</p>
-                </div>
-              </motion.div>
+              <ProcessCard key={step.title} step={step} index={index} />
             ))}
           </div>
         </motion.section>
@@ -100,30 +99,21 @@ export default function Services() {
             hidden: { opacity: 0, scale: 0.8 },
             visible: { opacity: 1, scale: 1 }
           }}
+          className="max-w-6xl mx-auto px-6"
         >
           <motion.div 
             whileHover={{ scale: 1.02 }}
-            className="max-w-4xl mx-auto text-center bg-accent/10 p-12 rounded-3xl relative overflow-hidden"
+            className="text-center bg-accent/10 p-16 relative overflow-hidden"
           >
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-              animate={{ x: ["-100%", "200%"] }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                repeatType: "loop",
-                ease: "linear",
-              }}
-            />
-            <h2 className="text-3xl sm:text-4xl font-serif mb-6">
+            <h2 className="text-4xl sm:text-5xl font-serif mb-6">
               Ready to Begin Your Transformation?
             </h2>
-            <p className="text-lg mb-8 text-foreground/80 max-w-2xl mx-auto">
+            <p className="text-xl mb-8 text-foreground/80 max-w-2xl mx-auto">
               Take the first step towards a healthier, more balanced life with a complimentary consultation.
             </p>
             <Link 
               href="/contact" 
-              className="btn-primary inline-flex items-center group"
+              className="btn-primary inline-flex items-center group text-base"
             >
               Schedule Your Free Session
               <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
@@ -227,26 +217,67 @@ const process = [
 ];
 
 // Service Card Component
-function ServiceCard({ service, index }: { service: Service; index: number }) {
+function ServiceCard({ service }: { service: Service; index: number }) {
+  const cardRef = React.useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: cardRef,
+    offset: ["start end", "end start"]
+  });
+
+  const opacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
+  const y = useTransform(scrollYProgress, [0, 0.3], [20, 0]);
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.2 }}
-      className="glass-card p-8 rounded-2xl hover:shadow-luxury transition-all duration-500"
+      ref={cardRef}
+      style={{ opacity, y }}
+      className="glass-card p-8 hover:shadow-luxury transition-all duration-500 group"
+      whileHover={{ scale: 1.02 }}
     >
-      <div className="mb-6 text-accent">{service.icon}</div>
-      <h3 className="text-2xl font-serif mb-4">{service.title}</h3>
-      <p className="text-foreground/70 mb-6">{service.description}</p>
+      <div className="mb-6 text-accent group-hover:scale-125 origin-left transition-transform">
+        {service.icon}
+      </div>
+      <h3 className="text-2xl font-serif mb-4 group-hover:text-accent transition-colors duration-500">
+        {service.title}
+      </h3>
+      <p className="text-foreground/70 mb-6 group-hover:text-accent/80 transition-colors duration-500">
+        {service.description}
+      </p>
       <ul className="space-y-3">
         {service.features.map((feature: string) => (
           <li key={feature} className="flex items-start gap-3">
             <span className="text-accent">•</span>
-            <span className="text-foreground/70">{feature}</span>
+            <span className="text-foreground/70 group-hover:text-accent/70 transition-colors duration-500">
+              {feature}
+            </span>
           </li>
         ))}
       </ul>
     </motion.div>
+  );
+}
+
+function ProcessCard({ step, index }: { step: ProcessStep; index: number }) {
+  return (
+    <div className="relative">
+      <div className="process-number">
+        <span>{index + 1}</span>
+      </div>
+      <motion.div 
+        className="process-card"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ 
+          duration: 0.5,
+          delay: index * 0.2,
+          ease: "easeOut"
+        }}
+        whileHover={{ y: -5 }}
+      >
+        <h3 className="text-2xl font-serif mb-4">{step.title}</h3>
+        <p className="text-foreground/70">{step.description}</p>
+      </motion.div>
+    </div>
   );
 }

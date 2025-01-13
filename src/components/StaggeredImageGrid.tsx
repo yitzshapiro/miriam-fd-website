@@ -40,7 +40,7 @@ export function StaggeredImageGrid() {
               transition: { delay: index * 0.2 }
             }
           }}
-          className="relative aspect-square overflow-hidden rounded-2xl"
+          className="relative aspect-square overflow-hidden"
         >
           <Image
             src={img.src}

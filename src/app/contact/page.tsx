@@ -13,11 +13,23 @@ export default function Contact() {
         <motion.section
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
           className="relative text-center max-w-4xl mx-auto pt-24 pb-16"
         >
           <h1 className="text-5xl sm:text-6xl font-serif mb-6">
-            Start Your <span className="gradient-text">Wellness</span> Journey
+            Start Your{" "}
+            <motion.span 
+              className="gradient-text"
+              animate={{
+                color: ["#1A1A1A", "#C4B0A3", "#1A1A1A"],
+              }}
+              transition={{
+                duration: 8,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            >Wellness</motion.span>{" "}
+            Journey
           </h1>
           <p className="text-lg text-foreground/70">
             Connect with Miriam for personalized health & wellness coaching, in-person or online
@@ -33,7 +45,7 @@ export default function Contact() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="space-y-8"
           >
-            <div className="bg-white/80 p-8 rounded-2xl shadow-luxury">
+            <div className="bg-white/80 p-8 shadow-luxury">
               <h2 className="text-2xl font-serif mb-6">Get in Touch</h2>
               <div className="space-y-4 text-foreground/80">
                 <div className="flex items-center gap-3">
@@ -51,7 +63,7 @@ export default function Contact() {
               </div>
             </div>
 
-            <div className="bg-white/80 p-8 rounded-2xl shadow-luxury">
+            <div className="bg-white/80 p-8 shadow-luxury">
               <h2 className="text-2xl font-serif mb-6">Hours</h2>
               <div className="space-y-2 text-foreground/80">
                 <p>Monday – Friday: 9 AM – 6 PM</p>
@@ -66,7 +78,7 @@ export default function Contact() {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="bg-white/80 p-8 rounded-2xl shadow-luxury"
+            className="bg-white/80 p-8 shadow-luxury"
           >
             <form className="space-y-6">
               <div>
@@ -74,7 +86,7 @@ export default function Contact() {
                 <input 
                   type="text" 
                   id="name" 
-                  className="w-full px-4 py-3 rounded-lg bg-white/50 border border-accent/20 focus:border-accent focus:ring-1 focus:ring-accent transition-all" 
+                  className="w-full px-4 py-3 bg-white/50 border border-accent/20 focus:border-accent focus:ring-1 focus:ring-accent transition-all" 
                   required 
                 />
               </div>
@@ -84,7 +96,7 @@ export default function Contact() {
                 <input 
                   type="email" 
                   id="email" 
-                  className="w-full px-4 py-3 rounded-lg bg-white/50 border border-accent/20 focus:border-accent focus:ring-1 focus:ring-accent transition-all" 
+                  className="w-full px-4 py-3 bg-white/50 border border-accent/20 focus:border-accent focus:ring-1 focus:ring-accent transition-all" 
                   required 
                 />
               </div>
@@ -94,7 +106,7 @@ export default function Contact() {
                 <input 
                   type="tel" 
                   id="phone" 
-                  className="w-full px-4 py-3 rounded-lg bg-white/50 border border-accent/20 focus:border-accent focus:ring-1 focus:ring-accent transition-all" 
+                  className="w-full px-4 py-3 bg-white/50 border border-accent/20 focus:border-accent focus:ring-1 focus:ring-accent transition-all" 
                 />
               </div>
 
@@ -103,7 +115,7 @@ export default function Contact() {
                 <textarea 
                   id="message" 
                   rows={4} 
-                  className="w-full px-4 py-3 rounded-lg bg-white/50 border border-accent/20 focus:border-accent focus:ring-1 focus:ring-accent transition-all" 
+                  className="w-full px-4 py-3 bg-white/50 border border-accent/20 focus:border-accent focus:ring-1 focus:ring-accent transition-all" 
                   required
                 ></textarea>
               </div>
@@ -127,7 +139,7 @@ export default function Contact() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.6 }}
         >
-          <div className="bg-accent/10 p-12 rounded-3xl relative overflow-hidden">
+          <div className="bg-accent/10 p-12 relative overflow-hidden">
             <motion.div
               className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
               animate={{

@@ -4,28 +4,48 @@ import React from 'react';
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useScroll, useTransform } from "framer-motion";
 
 const About: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background via-background to-tertiary/30">
-      <main className="max-w-4xl mx-auto px-4 py-20 space-y-24">
+    <div className="min-h-screen bg-[#FAF9F7]">
+      <main className="space-y-24" role="main">
         {/* Hero Section */}
-        <motion.section
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="relative text-center"
+        <section 
+          className="relative min-h-[90vh] flex items-center justify-center bg-[#E5E5E5]"
+          aria-labelledby="hero-heading"
         >
-          {/* Background Elements */}
-          <div className="absolute inset-0 bg-[url('/images/leaves-bg.jpg')] bg-cover opacity-20 bg-center rounded-3xl" />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/80 to-background/40 rounded-3xl" />
+          {/* Background with enhanced overlay */}
+          <motion.div 
+            className="absolute inset-0 overflow-hidden"
+            style={{
+              y: useTransform(useScroll().scrollY, [0, 500], [0, 100])
+            }}
+          >
+            <Image
+              src="/images/bamboo.jpg"
+              alt=""
+              fill
+              className="object-cover opacity-80 transition-opacity duration-700"
+              priority
+              aria-hidden="true"
+            />
+            {/* Added gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black/80" />
+          </motion.div>
           
-          {/* Content */}
-          <div className="relative p-12 sm:p-16">
+          {/* Content with improved layout */}
+          <motion.div 
+            className="relative z-10 text-center max-w-4xl mx-auto px-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            {/* Profile image with enhanced effects */}
             <motion.div 
-              className="mb-8"
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              className="mb-12 relative inline-block"
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 300 }}
             >
               <Image
                 src="/images/hero.jpg"
@@ -33,142 +53,252 @@ const About: React.FC = () => {
                 width={180}
                 height={180}
                 priority
-                className="rounded-full shadow-2xl border-4 border-white/90 mx-auto"
+                className="rounded-full mx-auto border-4 border-white shadow-lg 
+                         transition-transform duration-300 hover:shadow-xl"
+              />
+              {/* Enhanced glow effect */}
+              <motion.div
+                className="absolute inset-0 rounded-full bg-white/40 blur-2xl -z-10"
+                animate={{
+                  scale: [1, 1.2, 1],
+                  opacity: [0.4, 0.6, 0.4]
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+                aria-hidden="true"
               />
             </motion.div>
             
-            <h1 className="text-4xl sm:text-6xl font-serif font-bold mb-6">
-              Meet <span className="gradient-text">Miriam</span>
+            <h1 
+              id="hero-heading"
+              className="text-5xl sm:text-6xl font-serif mb-6 text-white"
+            >
+              <motion.span
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.3 }}
+              >
+                Meet Miriam
+              </motion.span>
             </h1>
-            <p className="text-xl text-foreground/80 max-w-2xl mx-auto">
+            <motion.p 
+              className="text-xl sm:text-2xl text-white/90 max-w-2xl mx-auto"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+            >
               Your NYC & Online Holistic Health & Wellness Coach
-            </p>
-          </div>
-        </motion.section>
+            </motion.p>
+          </motion.div>
 
-        {/* Journey Section */}
-        <motion.section
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="glass-card p-8 sm:p-12 rounded-2xl space-y-6"
-        >
-          <h2 className="text-3xl font-serif font-semibold">
-            From Passion to Profession: My Journey
-          </h2>
-          <div className="space-y-4 text-foreground/80">
-            <p>
-              My fascination with the interplay between nutrition, movement, and mindset began early in life. 
-              This passion led me to complete rigorous training in integrative nutrition, functional medicine, 
-              and mindfulness-based practices.
-            </p>
-            <p>
-              Today, my mission is to empower individuals—no matter their location—to create sustainable 
-              lifestyle changes that unlock unprecedented levels of health and happiness.
-            </p>
-          </div>
-        </motion.section>
+          {/* Enhanced scroll indicator */}
+          <motion.div
+            className="absolute bottom-12 left-1/2 -translate-x-1/2"
+            animate={{
+              y: [0, 10, 0],
+              opacity: [0.6, 1, 0.6]
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+            aria-hidden="true"
+          >
+            <span className="sr-only">Scroll down</span>
+            <svg 
+              className="w-8 h-8 text-white/80"
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor"
+            >
+              <path 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                strokeWidth={2} 
+                d="M19 14l-7 7m0 0l-7-7m7 7V3" 
+              />
+            </svg>
+          </motion.div>
+        </section>
 
-        {/* Method Section */}
-        <motion.section
+        {/* Journey Section with reveal animation */}
+        <motion.section 
+          className="px-4 sm:px-6 lg:px-24 py-24 bg-white"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="glass-card p-8 sm:p-12 rounded-2xl space-y-8"
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          aria-labelledby="journey-heading"
         >
-          <h2 className="text-3xl font-serif font-semibold">
-            A Tailored Method That Honors Your Individuality
-          </h2>
-          
-          <div className="grid sm:grid-cols-2 gap-8">
-            <div className="space-y-4">
-              <h3 className="text-xl font-semibold mb-4">Core Services</h3>
-              <ul className="space-y-3 text-foreground/80">
-                <li className="flex items-start gap-3">
-                  <span className="text-accent">•</span>
-                  Holistic Nutrition Planning
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-accent">•</span>
-                  Lifestyle Medicine
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-accent">•</span>
-                  Mindset & Emotional Well-being
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-accent">•</span>
-                  Continuous Support & Tracking
-                </li>
-              </ul>
-            </div>
-            
-            <div className="space-y-4">
-              <h3 className="text-xl font-semibold mb-4">Key Values</h3>
-              <ul className="space-y-3 text-foreground/80">
-                <li className="flex items-start gap-3">
-                  <span className="text-accent">1.</span>
-                  Personalization – Every journey is unique
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-accent">2.</span>
-                  Sustainability – Building lasting habits
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-accent">3.</span>
-                  Empathy – Compassion-driven coaching
-                </li>
-              </ul>
+          <div className="max-w-3xl mx-auto">
+            <h2 
+              id="journey-heading"
+              className="text-4xl font-serif mb-12 text-[#2C2C2C]"
+            >
+              From Passion to Profession: My Journey
+            </h2>
+            <div className="space-y-4 text-lg text-[#2C2C2C]/80">
+              <p>
+                My fascination with the interplay between nutrition, movement, and mindset began early in life. 
+                This passion led me to complete rigorous training in integrative nutrition, functional medicine, 
+                and mindfulness-based practices.
+              </p>
+              <p>
+                Today, my mission is to empower individuals—no matter their location—to create sustainable 
+                lifestyle changes that unlock unprecedented levels of health and happiness.
+              </p>
             </div>
           </div>
         </motion.section>
 
-        {/* CTA Section */}
-        <motion.section
-          whileInView="visible"
-          initial="hidden"
-          viewport={{ once: true }}
-          variants={{
-            hidden: { opacity: 0, scale: 0.8 },
-            visible: { opacity: 1, scale: 1 }
-          }}
-          className="text-center"
+        {/* Method Section with staggered animations */}
+        <motion.section 
+          className="px-4 sm:px-6 lg:px-20 py-16 bg-white"
+          aria-labelledby="method-heading"
         >
-          <motion.div 
-            whileHover={{ scale: 1.02 }}
-            className="bg-accent/10 p-12 rounded-3xl relative overflow-hidden"
-          >
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-              animate={{ x: ["-100%", "200%"] }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                repeatType: "loop",
-                ease: "linear",
-              }}
-            />
-            <h2 className="text-3xl font-serif mb-8">Ready to Transform Your Life?</h2>
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-              <Link 
-                href="/contact" 
-                className="btn-primary group"
+          <div className="max-w-6xl mx-auto">
+            <motion.h2 
+              id="method-heading"
+              className="text-3xl font-serif mb-12 text-[#2C2C2C]"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+            >
+              A Tailored Method That Honors Your Individuality
+            </motion.h2>
+            
+            <div className="grid md:grid-cols-2 gap-16 mb-16">
+              {/* Services list with hover effects */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
               >
-                Book Your Free Consultation
-                <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
-              </Link>
-              <Link 
-                href="/services" 
-                className="btn-secondary"
+                <h3 className="text-xl font-medium mb-6 text-[#2C2C2C]">Core Services</h3>
+                <ul className="space-y-4 text-[#2C2C2C]/80" role="list">
+                  {coreServices.map((service, index) => (
+                    <motion.li 
+                      key={index}
+                      className="flex items-center gap-3 group"
+                      whileHover={{ x: 5 }}
+                      transition={{ type: "spring", stiffness: 300 }}
+                    >
+                      <span className="text-[#C4B0A3] transition-colors group-hover:text-[#2C2C2C]">•</span>
+                      {service}
+                    </motion.li>
+                  ))}
+                </ul>
+              </motion.div>
+              
+              {/* Values list with hover effects */}
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4 }}
               >
-                Explore Services
-              </Link>
+                <h3 className="text-xl font-medium mb-6 text-[#2C2C2C]">Key Values</h3>
+                <ul className="space-y-4 text-[#2C2C2C]/80" role="list">
+                  {keyValues.map((value, index) => (
+                    <motion.li 
+                      key={index}
+                      className="flex items-start gap-3 group"
+                      whileHover={{ x: 5 }}
+                      transition={{ type: "spring", stiffness: 300 }}
+                    >
+                      <span className="text-[#C4B0A3] transition-colors group-hover:text-[#2C2C2C]">
+                        {index + 1}.
+                      </span>
+                      {value}
+                    </motion.li>
+                  ))}
+                </ul>
+              </motion.div>
             </div>
-          </motion.div>
+
+            {/* Grid images with hover effects */}
+            <div className="grid grid-cols-4 gap-4">
+              {[5, 6, 7, 8].map((num) => (
+                <motion.div
+                  key={num}
+                  whileHover={{ y: -5, scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                  className="overflow-hidden rounded-lg"
+                >
+                  <Image
+                    src={`/images/grid${num}.jpg`}
+                    alt=""
+                    width={300}
+                    height={300}
+                    className="rounded-lg transition-transform duration-300 hover:scale-105"
+                  />
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </motion.section>
+
+        {/* CTA Section with hover animations */}
+        <motion.section 
+          className="px-4 sm:px-6 lg:px-20 py-16 bg-[#F5F3F0]"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          aria-labelledby="cta-heading"
+        >
+          <div className="max-w-2xl mx-auto text-center">
+            <h2 
+              id="cta-heading"
+              className="text-3xl font-serif mb-8 text-[#2C2C2C]"
+            >
+              Ready to Transform Your Life?
+            </h2>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <motion.div whileHover={{ scale: 1.02 }}>
+                <Link 
+                  href="/contact" 
+                  className="inline-block px-8 py-3 bg-[#2C2C2C] text-white text-sm font-medium 
+                           hover:bg-[#2C2C2C]/90 transition-all duration-300 
+                           focus:ring-2 focus:ring-offset-2 focus:ring-[#2C2C2C] focus:outline-none"
+                >
+                  Book Your Free Consultation
+                </Link>
+              </motion.div>
+              <motion.div whileHover={{ scale: 1.02 }}>
+                <Link 
+                  href="/services" 
+                  className="inline-block px-8 py-3 border border-[#2C2C2C]/20 text-[#2C2C2C] text-sm font-medium 
+                           hover:bg-[#2C2C2C]/5 transition-all duration-300
+                           focus:ring-2 focus:ring-offset-2 focus:ring-[#2C2C2C] focus:outline-none"
+                >
+                  Explore Services
+                </Link>
+              </motion.div>
+            </div>
+          </div>
         </motion.section>
       </main>
     </div>
   );
 };
+
+// Data remains the same
+const coreServices = [
+  "Holistic Nutrition Planning",
+  "Lifestyle Medicine",
+  "Mindset & Emotional Well-being",
+  "Continuous Support & Tracking"
+];
+
+const keyValues = [
+  "Personalization – Every journey is unique",
+  "Sustainability – Building lasting habits",
+  "Empathy – Compassion-driven coaching"
+];
 
 export default About;
