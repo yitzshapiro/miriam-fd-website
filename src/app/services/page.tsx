@@ -13,6 +13,11 @@ interface Service {
   icon: React.ReactNode;
 }
 
+interface ProcessStep {
+  title: string;
+  description: string;
+}
+
 export default function Services() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-background via-background to-tertiary/30">
@@ -80,32 +85,7 @@ export default function Services() {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {process.map((step, index) => (
-              <div key={step.title} className="relative">
-                {/* Static number that doesn't move */}
-                <div className="absolute -top-8 left-1/2 -translate-x-1/2 w-16 h-16 
-                              bg-accent/10 flex items-center justify-center z-10">
-                  <span className="text-2xl font-serif text-accent">
-                    {index + 1}
-                  </span>
-                </div>
-                
-                {/* Animated card */}
-                <motion.div 
-                  className="glass-card p-8 pt-12 h-full"
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ 
-                    duration: 0.5,
-                    delay: index * 0.2,
-                    ease: "easeOut"
-                  }}
-                  whileHover={{ y: -5 }}
-                >
-                  <h3 className="text-2xl font-serif mb-4">{step.title}</h3>
-                  <p className="text-foreground/70">{step.description}</p>
-                </motion.div>
-              </div>
+              <ProcessCard key={step.title} step={step} index={index} />
             ))}
           </div>
         </motion.section>
@@ -274,5 +254,30 @@ function ServiceCard({ service }: { service: Service; index: number }) {
         ))}
       </ul>
     </motion.div>
+  );
+}
+
+function ProcessCard({ step, index }: { step: ProcessStep; index: number }) {
+  return (
+    <div className="relative">
+      <div className="process-number">
+        <span>{index + 1}</span>
+      </div>
+      <motion.div 
+        className="process-card"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ 
+          duration: 0.5,
+          delay: index * 0.2,
+          ease: "easeOut"
+        }}
+        whileHover={{ y: -5 }}
+      >
+        <h3 className="text-2xl font-serif mb-4">{step.title}</h3>
+        <p className="text-foreground/70">{step.description}</p>
+      </motion.div>
+    </div>
   );
 }
