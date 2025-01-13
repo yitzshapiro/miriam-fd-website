@@ -79,7 +79,7 @@ export default function Testimonials() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
         >
-          <div className="bg-accent/10 p-12 rounded-3xl relative overflow-hidden">
+          <div className="bg-accent/10 p-12 relative overflow-hidden">
             <motion.div
               className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
               animate={{
@@ -120,7 +120,7 @@ function TestimonialCard({ testimonial, index }: { testimonial: Testimonial; ind
         rotateY: 5,
         boxShadow: "0 20px 40px rgba(0,0,0,0.1)"
       }}
-      className="bg-white p-8 rounded-2xl shadow-luxury"
+      className="bg-white p-8 shadow-luxury"
     >
       <div className="flex items-center gap-4 mb-4">
         <Image

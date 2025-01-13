@@ -45,3 +45,5 @@ wp-content/*
 !wp-content/themes/
 !wp-content/mu-plugins/
 .env
+
+.vscode

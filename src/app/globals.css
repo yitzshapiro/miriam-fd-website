@@ -13,146 +13,114 @@
   --tertiary: #F5F3F0;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #FAF9F7;
-    --foreground: #1A1A1A;
+/* Base Styles */
+@layer base {
+  body {
+    @apply text-foreground bg-background font-sans leading-relaxed;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0;
+    line-height: 1.5;
+    font-weight: 300;
   }
-} 
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: 'Inter', sans-serif;
-  letter-spacing: 0;
-  line-height: 1.5;
-  font-weight: 300;
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cormorant Garamond', serif;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    font-weight: 300;
+  }
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Cormorant Garamond', serif;
-  letter-spacing: -0.02em;
-  line-height: 1.1;
-  font-weight: 300;
+/* Component Styles */
+@layer components {
+  .btn-primary {
+    @apply bg-foreground text-white px-8 py-4 
+      font-light text-sm tracking-wide
+      transition-all duration-300 inline-flex items-center justify-center
+      hover:bg-accent hover:shadow-md;
+  }
+
+  .btn-secondary {
+    @apply bg-transparent text-white px-8 py-4 
+      font-light text-sm tracking-wide
+      transition-all duration-300 inline-flex items-center justify-center
+      hover:bg-white/10
+      border border-white hover:border-white;
+  }
+
+  .card {
+    @apply bg-white p-8 rounded-lg
+      transition-all duration-300
+      hover:shadow-sm;
+  }
+
+  .glass-card {
+    @apply bg-white/95 border border-foreground/10 
+      shadow-sm transition-all duration-300;
+  }
+
+  .hero-section {
+    @apply relative isolate overflow-hidden text-white min-h-screen flex items-center;
+  }
+
+  .hero-section::before {
+    content: '';
+    @apply absolute inset-0 bg-black/30 z-[1];
+    backdrop-filter: brightness(0.8) contrast(1.1);
+  }
+
+  .hero-content {
+    @apply relative z-10 max-w-4xl mx-auto px-6 space-y-8;
+  }
+
+  .hero-title {
+    @apply text-5xl md:text-7xl font-serif font-light leading-tight;
+  }
+
+  .hero-buttons {
+    @apply flex flex-col sm:flex-row gap-4 mt-8;
+  }
+
+  .process-number {
+    @apply w-16 h-16 bg-accent/10 
+           flex items-center justify-center 
+           absolute -top-8 left-1/2 -translate-x-1/2
+           z-10 transform-gpu;
+    transform: translateX(-50%);
+    will-change: transform;
+  }
+
+  .process-number span {
+    @apply text-2xl font-serif text-accent;
+  }
+
+  .process-card {
+    @apply glass-card p-8 pt-12 h-full relative
+           z-0 transform-gpu;
+  }
+
+  /* Add a wrapper to handle the hover animation */
+  .process-wrapper {
+    @apply relative;
+    transform: translateZ(0);
+  }
 }
 
-a {
-  color: var(--primary);
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-a:hover {
-  color: var(--accent);
-}
-
-.btn-primary {
-  @apply bg-foreground text-white px-6 py-3 
-    rounded-full font-light text-sm tracking-wide
-    transition-all duration-300 inline-flex items-center justify-center
-    hover:bg-accent hover:shadow-md transform hover:-translate-y-0.5;
-}
-
-.btn-secondary {
-  @apply bg-transparent text-foreground px-6 py-3 
-    rounded-full font-light text-sm tracking-wide
-    transition-all duration-300 inline-flex items-center justify-center
-    hover:bg-foreground/5 hover:border-accent
-    border border-foreground/20;
-}
-
-.card {
-  @apply bg-white p-8 rounded-lg
-    transition-all duration-300
-    hover:shadow-sm;
-}
-
-.testimonial {
-  @apply bg-tertiary p-6 rounded-lg border-l-4 border-accent;
-}
-
-.footer {
-  @apply bg-tertiary py-12 px-8 mt-20 border-t border-foreground/10;
-}
-
-/* Add new utility classes */
-.gradient-text {
-  @apply text-foreground relative;
-  background-clip: text;
-  -webkit-background-clip: text;
-  user-select: text;
-}
-
-.hover-card {
-  @apply transition-all duration-500 
-    hover:translate-y-[-10px] hover:shadow-2xl
-    hover:bg-gradient-to-b hover:from-white hover:to-tertiary/50;
-}
-
-/* Add smooth scrolling */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Enhance text selection */
-::selection {
-  @apply bg-accent/20 text-foreground;
-  color: var(--foreground);
-  background: rgba(196, 176, 163, 0.2);
-}
-
-/* Update heading styles */
-h2 {
-  @apply text-foreground/90 font-light;
-}
-
-/* Optional: Add a subtle transition effect for child elements when parent h2 is hovered */
-h2 + p {
-  @apply transition-colors duration-500;
-}
-
-h2:hover + p {
-  @apply text-accent/80;
-}
-
-/* Add luxury glass effect utility */
-.glass-card {
-  @apply bg-white/95 border border-foreground/10 
-    shadow-sm transition-all duration-300;
-}
-
-/* Add floating animation */
-.floating {
-  animation: none;
-}
-
-@keyframes floating {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-  100% { transform: translateY(0px); }
-}
-
-/* Fix hero image centering */
-.hero-image-container {
-  @apply flex justify-center items-center w-full;
-}
-
-/* Blog Content Styling */
+/* Blog Specific Styles */
 .blog-content {
-  @apply max-w-4xl mx-auto px-4 py-12;
+  @apply space-y-6 text-lg;
 }
 
-/* Typography */
 .blog-content h1 {
-  @apply text-4xl md:text-5xl font-serif mb-8 font-light;
+  @apply text-4xl md:text-5xl font-serif mb-8 font-light text-foreground;
 }
 
 .blog-content h2 {
-  @apply text-2xl md:text-3xl font-serif mt-12 mb-6 font-light;
+  @apply text-2xl md:text-3xl font-serif mt-12 mb-6 font-light text-foreground;
 }
 
 .blog-content h3 {
-  @apply text-xl md:text-2xl font-serif mt-8 mb-4 font-light;
+  @apply text-xl md:text-2xl font-serif mt-8 mb-4 font-light text-foreground;
 }
 
 .blog-content p {
@@ -162,7 +130,7 @@ h2:hover + p {
 /* Lists */
 .blog-content ul,
 .blog-content ol {
-  @apply mb-6 pl-6 space-y-2 text-foreground/80;
+  @apply mb-6 pl-6 space-y-3 text-foreground/80;
 }
 
 .blog-content ul {
@@ -174,200 +142,115 @@ h2:hover + p {
 }
 
 .blog-content ul li::before {
-  @apply content-['•'] absolute left-0 text-accent;
+  content: '•';
+  @apply absolute left-0 text-accent;
 }
 
 .blog-content ol {
   @apply list-decimal pl-8;
 }
 
-/* Code blocks and inline code */
-.blog-content pre {
-  @apply bg-tertiary p-4 rounded-lg my-6 overflow-x-auto;
+/* Back button specific styles */
+.blog-back-button {
+  @apply inline-flex items-center gap-2 text-primary hover:text-accent 
+         transition-colors duration-300 mb-8 font-medium;
 }
 
-.blog-content code {
-  @apply bg-tertiary px-1.5 py-0.5 rounded text-sm font-mono;
+.group .blog-back-button svg {
+  transition: transform 0.3s;
 }
 
-/* Images */
-.blog-content img {
-  @apply rounded-xl my-8 max-w-full h-auto mx-auto shadow-sm;
+.group:hover .blog-back-button svg {
+  transform: translateX(-4px);
 }
 
-/* Blockquotes */
-.blog-content blockquote {
-  @apply pl-6 border-l-4 border-accent/30 italic my-8 
-    text-foreground/70 py-2;
+/* Featured image container */
+.featured-image {
+  @apply aspect-[16/9] relative rounded-xl overflow-hidden mb-12 shadow-md;
 }
 
-/* Horizontal rule */
-.blog-content hr {
-  @apply my-12 border-foreground/10;
-}
-
-/* Links */
-.blog-content a {
-  @apply text-accent underline-offset-4 hover:text-accent/80 
-    decoration-accent/30 hover:decoration-accent;
-}
-
-/* Key Takeaways Section */
+/* Key takeaways section */
 .key-takeaways {
-  @apply mt-12 p-8 bg-tertiary/50 rounded-2xl border border-accent/10;
+  @apply my-12 p-8 bg-tertiary/30 rounded-xl border border-accent/10;
 }
 
 .key-takeaways h2 {
-  @apply text-2xl font-serif mb-6 mt-0 text-foreground/90;
+  @apply text-2xl font-serif mb-6 mt-0;
 }
 
-/* Reset ALL list styling */
+/* Completely reset and restyle the list */
 .key-takeaways ul {
-  @apply space-y-3 !important;
-  list-style: none !important;
-  padding: 0 !important;
-  margin: 0 !important;
+  @apply space-y-4; /* Increased spacing between items */
 }
 
 .key-takeaways li {
-  @apply flex items-start !important;
-  list-style: none !important;
-  padding: 0 !important;
-  margin: 0 !important;
+  @apply relative pl-6 text-foreground/80;
+  list-style-type: none;
 }
 
-.key-takeaways li::before,
-.key-takeaways li::after,
-.prose .key-takeaways li::before,
-.prose .key-takeaways li::after {
-  display: none !important;
-  content: none !important;
+.key-takeaways li::before {
+  content: '•';
+  @apply absolute left-0 text-accent;
 }
 
-/* Override any other potential bullet styles */
-.prose .key-takeaways ul,
-.blog-content .key-takeaways ul {
-  list-style: none !important;
-  padding: 0 !important;
+/* Override any potential Tailwind Typography styles */
+.prose .key-takeaways ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-/* Tags Section */
+.prose .key-takeaways li {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.prose .key-takeaways li::before {
+  content: '•';
+  @apply absolute left-0 text-accent;
+}
+
+/* Tags styling */
 .tag-cloud {
-  @apply flex gap-2 flex-wrap mt-8;
+  @apply flex flex-wrap gap-2 mt-8;
 }
 
 .tag {
-  @apply px-4 py-1.5 bg-sage-light/10 text-sage-dark rounded-full text-sm
-    hover:bg-accent/10 hover:text-accent transition-colors duration-300;
+  @apply px-4 py-1.5 bg-tertiary rounded-full text-sm text-foreground/70
+         hover:bg-accent/10 hover:text-accent transition-colors duration-300;
 }
 
-/* Prose Overrides for Markdown */
-.prose {
-  @apply max-w-none;
+/* Utility Classes */
+@layer utilities {
+  .section-spacing {
+    @apply space-y-32;
+  }
+
+  .content-padding {
+    @apply px-6 sm:px-8 lg:px-12;
+  }
 }
 
-.prose h1,
-.prose h2,
-.prose h3,
-.prose h4 {
-  @apply font-serif font-light text-foreground/90 mt-8 mb-4;
+/* Global Utilities */
+html {
+  scroll-behavior: smooth;
+  @apply overflow-x-hidden;
 }
 
-.prose h2 {
-  @apply text-2xl md:text-3xl;
+::selection {
+  @apply bg-accent/20 text-foreground;
 }
 
-.prose h3 {
-  @apply text-xl md:text-2xl;
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #FAF9F7;
+    --foreground: #1A1A1A;
+  }
 }
 
-.prose p {
-  @apply text-foreground/80 leading-relaxed mb-6;
-}
-
-.prose ul {
-  @apply list-none pl-6 space-y-2;
-}
-
-.prose ul li {
-  @apply relative pl-6;
-}
-
-.prose ul li::before {
-  @apply content-['•'] absolute left-0 text-accent;
-}
-
-.prose pre {
-  @apply bg-tertiary p-4 rounded-lg my-6 overflow-x-auto;
-}
-
-.prose code {
-  @apply bg-tertiary px-1.5 py-0.5 rounded text-sm font-mono;
-}
-
-/* Back Button */
-.blog-back-button {
-  @apply inline-flex items-center gap-2 text-accent hover:text-accent/80 
-    transition-colors mb-8 font-medium;
-}
-
-.blog-back-button:hover svg {
-  @apply -translate-x-1 transition-transform;
-}
-
-/* Dark mode adjustments */
 .dark .prose {
   @apply prose-invert;
 }
 
-.dark .prose a {
-  @apply text-accent decoration-accent/40;
-}
 
-.dark .prose blockquote {
-  @apply border-accent/40;
-}
-
-/* Links in blog content and key takeaways */
-.blog-content a,
-.key-takeaways a {
-  @apply text-accent hover:text-accent/80 
-    transition-colors duration-300 
-    no-underline hover:underline 
-    underline-offset-4 decoration-accent/30 
-    hover:decoration-accent !important;
-}
-
-/* Override any WordPress default link styles */
-.blog-content a[data-type],
-.key-takeaways a[data-type] {
-  @apply text-accent !important;
-  text-decoration: none !important;
-}
-
-.blog-content a[data-type]:hover,
-.key-takeaways a[data-type]:hover {
-  @apply text-accent/80 underline !important;
-}
-
-/* Featured image styles */
-.featured-image {
-  @apply w-full h-[400px] md:h-[500px] rounded-xl mb-8 relative overflow-hidden;
-}
-
-.featured-image img {
-  @apply object-cover w-full h-full;
-}
-
-/* Image caption styles */
-.wp-caption {
-  @apply my-8 mx-auto max-w-full;
-}
-
-.wp-caption img {
-  @apply mb-2;
-}
-
-.wp-caption-text {
-  @apply text-sm text-foreground/60 text-center italic;
-}
