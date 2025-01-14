@@ -8,7 +8,7 @@
   --background: #FAF9F7;
   --foreground: #1A1A1A;
   --accent: #C4B0A3;
-  --primary: #8A8A8A;
+  --primary: #b77d57;
   --secondary: #E5E0DA;
   --tertiary: #F5F3F0;
 }
@@ -37,7 +37,7 @@
     @apply bg-foreground text-white px-8 py-4 
       font-light text-sm tracking-wide
       transition-all duration-300 inline-flex items-center justify-center
-      hover:bg-accent hover:shadow-md;
+      hover:bg-accent/80 hover:shadow-md;
   }
 
   .btn-secondary {
@@ -103,6 +103,71 @@
   .process-wrapper {
     @apply relative;
     transform: translateZ(0);
+  }
+
+  .navbar-light {
+    color: var(--foreground);
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+
+  .navbar-transparent {
+    @apply text-white;
+    background: rgba(196, 176, 163, 0.02);
+    backdrop-filter: blur(8px) saturate(150%);
+    -webkit-backdrop-filter: blur(8px) saturate(150%);
+  }
+
+  .navbar-transparent .btn-primary {
+    @apply bg-accent text-white hover:bg-accent/80;
+  }
+
+  .navbar-transparent svg {
+    @apply text-white;
+  }
+
+  .navbar-transparent .text-foreground {
+    @apply text-white;
+  }
+
+  .navbar-transparent .text-foreground\/80 {
+    @apply text-white/80;
+  }
+
+  .navbar-transition {
+    @apply transition-all;
+    transition-property: background-color, padding, backdrop-filter, -webkit-backdrop-filter;
+    transition-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
+    transition-duration: 600ms;
+    transform: translate3d(0,0,0);
+  }
+
+  /* Immediate text color changes */
+  .navbar-transparent .nav-link,
+  .navbar-light .nav-link {
+    transition-property: none;
+  }
+
+  /* Updated nav link styles */
+  .nav-link {
+    @apply relative inline-block px-6 py-3 text-lg font-medium transition-colors duration-300;
+  }
+
+  .nav-link::after {
+    content: '';
+    @apply absolute bottom-[10px] left-6 right-6 h-[1.5px] bg-accent origin-left;
+    transform: scaleX(0);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .nav-link:hover::after {
+    transform: scaleX(1);
+  }
+
+  /* Keep accent color for underline even in transparent state */
+  .navbar-transparent .nav-link::after {
+    @apply bg-accent;
   }
 }
 

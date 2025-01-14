@@ -1,9 +1,9 @@
 'use client';
 
 import { motion } from "framer-motion";
-import Link from "next/link";
 import { Phone, Mail, MapPin } from 'lucide-react';
 import { IconWrapper } from "@/components/icons";
+import { CTASection } from "@/components/CTASection";
 
 export default function Contact() {
   return (
@@ -133,36 +133,7 @@ export default function Contact() {
         </div>
 
         {/* CTA Section */}
-        <motion.section
-          className="max-w-4xl mx-auto text-center"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
-        >
-          <div className="bg-accent/10 p-12 relative overflow-hidden">
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-              animate={{
-                x: ["-100%", "200%"],
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                repeatType: "loop",
-                ease: "linear",
-              }}
-            />
-            <h2 className="text-3xl font-serif mb-6">
-              Ready to Transform Your Life?
-            </h2>
-            <p className="text-lg mb-8 text-foreground/80">
-              Take the first step towards a healthier, more balanced lifestyle
-            </p>
-            <Link href="/services" className="btn-secondary inline-block">
-              Explore Our Services
-            </Link>
-          </div>
-        </motion.section>
+        <CTASection />
       </main>
     </div>
   );

@@ -43,7 +43,7 @@ export default function Footer() {
             <div className="space-y-4">
               <h3 className="font-serif text-lg text-foreground/80">Legal</h3>
               <nav className="flex flex-col space-y-3">
-                {['Privacy Policy', 'Terms of Service', 'Local Pages'].map(item => (
+                {['Privacy Policy', 'Terms of Service', 'Local'].map(item => (
                   <Link 
                     key={item}
                     href={`/${item.toLowerCase().replace(/\s+/g, '-')}`} 
@@ -62,7 +62,7 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             {/* Copyright */}
             <p className="text-sm text-foreground/60">
-              © 2025 Miriam Fuentecilla Diaz. All Rights Reserved.
+              © {new Date().getFullYear()} Miriam Fuentecilla Diaz. All Rights Reserved.
             </p>
 
             {/* Social Links */}

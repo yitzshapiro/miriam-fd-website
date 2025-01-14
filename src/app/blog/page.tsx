@@ -1,6 +1,6 @@
 import { getAllPosts } from '@/lib/blog-data';
 import BlogContent from '@/app/blog/BlogContent';
-
+import { CTASection } from '@/components/CTASection';
 export const revalidate = 60;
 
 type Props = {
@@ -29,6 +29,8 @@ export default async function BlogIndex({ searchParams }: Props) {
       )}
       
       <BlogContent posts={posts} />
+      <CTASection />
+
     </div>
   );
 }

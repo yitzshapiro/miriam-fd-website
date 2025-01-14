@@ -1,10 +1,10 @@
 'use client';
 
 import React from 'react';
-import Link from "next/link";
 import { motion } from "framer-motion";
 import { Icons } from "@/components/icons";
 import { useScroll, useTransform } from "framer-motion";
+import { CTASection } from '@/components/CTASection';
 
 interface Service {
   title: string;
@@ -91,35 +91,7 @@ export default function Services() {
         </motion.section>
 
         {/* CTA Section */}
-        <motion.section
-          whileInView="visible"
-          initial="hidden"
-          viewport={{ once: true }}
-          variants={{
-            hidden: { opacity: 0, scale: 0.8 },
-            visible: { opacity: 1, scale: 1 }
-          }}
-          className="max-w-6xl mx-auto px-6"
-        >
-          <motion.div 
-            whileHover={{ scale: 1.02 }}
-            className="text-center bg-accent/10 p-16 relative overflow-hidden"
-          >
-            <h2 className="text-4xl sm:text-5xl font-serif mb-6">
-              Ready to Begin Your Transformation?
-            </h2>
-            <p className="text-xl mb-8 text-foreground/80 max-w-2xl mx-auto">
-              Take the first step towards a healthier, more balanced life with a complimentary consultation.
-            </p>
-            <Link 
-              href="/contact" 
-              className="btn-primary inline-flex items-center group text-base"
-            >
-              Schedule Your Free Session
-              <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
-            </Link>
-          </motion.div>
-        </motion.section>
+        <CTASection />
       </main>
     </div>
   );
@@ -265,15 +237,28 @@ function ProcessCard({ step, index }: { step: ProcessStep; index: number }) {
       </div>
       <motion.div 
         className="process-card"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        initial={{ 
+          opacity: 0, 
+          scale: 0.8,
+          rotateX: 15,
+          y: 50
+        }}
+        whileInView={{ 
+          opacity: 1, 
+          scale: 1,
+          rotateX: 0,
+          y: 0
+        }}
         viewport={{ once: true }}
         transition={{ 
-          duration: 0.5,
-          delay: index * 0.2,
-          ease: "easeOut"
+          duration: 0.7,
+          delay: index * 0.05,
+          ease: [0.23, 1, 0.32, 1] // cubic-bezier easing for smoother animation
         }}
-        whileHover={{ y: -5 }}
+        whileHover={{ 
+          y: -5,
+          transition: { duration: 0.2 }
+        }}
       >
         <h3 className="text-2xl font-serif mb-4">{step.title}</h3>
         <p className="text-foreground/70">{step.description}</p>
