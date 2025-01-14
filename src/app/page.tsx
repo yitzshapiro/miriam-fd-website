@@ -210,7 +210,7 @@ export default function Home() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true, margin: "-100px" }}
-            className="px-4 sm:px-6"
+            className="px-4 mb-16 sm:px-6"
           >
             <div className="text-center mb-16 max-w-4xl mx-auto">
               <h2 className="text-4xl sm:text-5xl font-serif mb-4">Client Success Stories</h2>
